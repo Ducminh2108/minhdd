@@ -58,45 +58,38 @@
     <h1>Do Duc Minh's Profile</h1>
   </header>
   <nav>
-    <a href="#home">Home</a>
-    <a href="#extracurricular">Hoạt động ngoại khóa</a>
-    <a href="#research">Research Project</a>
-    <a href="#academic">Academic activities</a>
-    <a href="#science">Thực hành khoa học</a>
-    <a href="#contact">Contacts</a>
+    <a href="#home" onclick="showSection('home')">Home</a>
+    <a href="#extracurricular" onclick="showSection('extracurricular')">Hoạt động ngoại khóa</a>
+    <a href="#research" onclick="showSection('research')">Research Project</a>
+    <a href="#academic" onclick="showSection('academic')">Academic activities</a>
+    <a href="#science" onclick="showSection('science')">Thực hành khoa học</a>
+    <a href="#contact" onclick="showSection('contact')">Contacts</a>
   </nav>
 
-  <section id="home">
+  <section id="home" class="content active">
     <h2>Trang chủ</h2>
     <p>Chào mừng đến với trang cá nhân của tôi - Đức Minh. Đây là nơi tôi chia sẻ về các hoạt động học tập, nghiên cứu và ngoại khóa của mình.</p>
   </section>
 
-<section id="extracurricular">
-  <h2>Hoạt động ngoại khóa</h2>
-  <ul>
-    <li>
-      2024: Giải nhất cuộc thi ICAN 2024
-      <br>
-      <!-- Ảnh minh họa cho ICAN -->
-      <img src="z6850432528537_43a75cfeefc1b443a249f3fd3068cad1.jpg" 
-           alt="Ảnh ICAN 2024" 
-           width="500" 
-           style="margin-top:10px; border-radius:10px;">
-    </li>
-    <li>
-      2024: Cuộc thi AIGC - Singapore 2025
-      <br>
-      <!-- Ảnh minh họa cho AIGC -->
-      <img src="z6850436293266_951cd4fe1da8f55ce2c571f1ec67348e.jpg" 
-           alt="Ảnh AIGC Singapore 2025" 
-           width="500" 
-           style="margin-top:10px; border-radius:10px;">
-    </li>
-  </ul>
-</section>
+  <section id="extracurricular" class="content">
+    <h2>Hoạt động ngoại khóa</h2>
+    <ul>
+      <li>
+        2024: Giải nhất cuộc thi ICAN 2024
+        <br>
+        <img src="z6850432528537_43a75cfeefc1b443a249f3fd3068cad1.jpg" 
+             alt="Ảnh ICAN 2024" width="500" style="margin-top:10px; border-radius:10px;">
+      </li>
+      <li>
+        2024: Cuộc thi AIGC - Singapore 2025
+        <br>
+        <img src="z6850436293266_951cd4fe1da8f55ce2c571f1ec67348e.jpg" 
+             alt="Ảnh AIGC Singapore 2025" width="500" style="margin-top:10px; border-radius:10px;">
+      </li>
+    </ul>
+  </section>
 
-
-  <section id="research">
+  <section id="research" class="content">
     <h2>Dự án nghiên cứu</h2>
     <ul>
       <li>Xử lí rác từ phân vi sinh</li>
@@ -104,7 +97,7 @@
     </ul>
   </section>
 
-  <section id="academic">
+  <section id="academic" class="content">
     <h2>Hoạt động học thuật</h2>
     <ul>
       <li>Chế tạo động cơ</li>
@@ -112,7 +105,7 @@
     </ul>
   </section>
 
-  <section id="science">
+  <section id="science" class="content">
     <h2>Thực hành khoa học</h2>
     <ul>
       <li>Thực tập nhà máy thuốc lá</li>
@@ -120,7 +113,7 @@
     </ul>
   </section>
 
-  <section id="contact">
+  <section id="contact" class="content">
     <h2>Liên hệ</h2>
     <ul>
       <li>Email: ducminhcnhers@gmail.com</li>
@@ -132,5 +125,39 @@
   <footer>
     &copy; 2025 Do Duc Minh. All rights reserved.
   </footer>
+
+  <style>
+    .content {
+      display: none;
+      opacity: 0;
+      transition: opacity 0.7s ease-in-out;
+    }
+    .content.active {
+      display: block;
+      opacity: 1;
+      animation: fadeIn 0.7s ease-in-out;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+  </style>
+
+  <script>
+    function showSection(sectionId) {
+      // Ẩn tất cả sections
+      document.querySelectorAll('.content').forEach(sec => {
+        sec.classList.remove('active');
+      });
+      // Hiện section được chọn
+      document.getElementById(sectionId).classList.add('active');
+    }
+
+    // Hiện mặc định section Home khi load trang
+    document.addEventListener('DOMContentLoaded', function() {
+      showSection('home');
+    });
+  </script>
 </body>
+
 </html>
