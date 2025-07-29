@@ -66,10 +66,10 @@
       to { opacity: 1; }
     }
 
-    /* Box giới thiệu bản thân riêng biệt */
+    /* Box giới thiệu bản thân */
     .intro-box {
       display: flex;
-      align-items: flex-start;
+      align-items: stretch; /* để ảnh cao bằng khối text */
       justify-content: flex-start;
       background-color: white;
       padding: 25px;
@@ -80,8 +80,9 @@
       gap: 30px;
     }
     .profile-pic {
-      width: 280px;
-      height: 280px;
+      width: auto;
+      height: 100%; /* tự co giãn theo chiều cao intro-text */
+      max-width: 320px; /* tránh ảnh quá rộng */
       border-radius: 12px;
       object-fit: cover;
       flex-shrink: 0;
@@ -89,15 +90,24 @@
     .intro-text {
       flex: 1;
     }
-    .intro-text h3 {
-      margin-top: 0;
-      color: #2c3e50;
-    }
     .intro-text p {
       font-size: 17px;
       line-height: 1.7;
       color: #333;
       text-align: justify;
+    }
+
+    /* Responsive cho màn hình nhỏ */
+    @media (max-width: 768px) {
+      .intro-box {
+        flex-direction: column;
+        align-items: center;
+      }
+      .profile-pic {
+        width: 100%;
+        height: auto;
+        max-width: 400px;
+      }
     }
   </style>
 </head>
@@ -118,10 +128,8 @@
     <!-- Box Home gốc -->
     <h2>Home</h2>
     <p>Welcome to my personal page - Duc Minh. This is where I share about my study, research project, and extracurricular activities.</p>
-  </section>
 
-  <!-- Box giới thiệu bản thân tách riêng -->
-  <section id="about-me" class="content active">
+    <!-- Box giới thiệu bản thân -->
     <div class="intro-box">
       <img src="profile-pic.png" alt="Profile Picture" class="profile-pic">
       <div class="intro-text">
@@ -131,7 +139,8 @@
            đồng thời chia sẻ kinh nghiệm học tập, nghiên cứu và những trải nghiệm thực tiễn của mình.  
            <br><br>
            Trong tương lai, tôi hy vọng có thể hợp tác cùng các bạn trẻ có cùng chí hướng để 
-           thực hiện nhiều dự án nghiên cứu, sáng tạo và ý nghĩa hơn.</p>
+           thực hiện nhiều dự án nghiên cứu, sáng tạo và ý nghĩa hơn. Bạn có thể liên hệ với tôi 
+           để cùng trao đổi ý tưởng và hợp tác trong các dự án mới.</p>
       </div>
     </div>
   </section>
@@ -193,18 +202,13 @@
 
   <script>
     function showSection(sectionId) {
-      // Ẩn tất cả sections
       document.querySelectorAll('.content').forEach(sec => {
         sec.classList.remove('active');
       });
-      // Hiện section được chọn
       document.getElementById(sectionId).classList.add('active');
     }
-
-    // Hiện mặc định section Home và About Me khi load trang
     document.addEventListener('DOMContentLoaded', function() {
       showSection('home');
-      document.getElementById('about-me').classList.add('active'); 
     });
   </script>
 </body>
