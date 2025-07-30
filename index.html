@@ -7,17 +7,22 @@
   <!-- Font Awesome cho icon -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+    }
     body {
       font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
       background-color: #f4f4f4;
       color: #333;
+      display: flex;
+      flex-direction: column;
     }
+
     /* Header */
     header {
       background-color: #fff;
-      padding: 0.8rem 2rem;
+      padding: 1rem 2rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -25,9 +30,10 @@
       position: sticky;
       top: 0;
       z-index: 999;
+      height: 65px;
     }
     .logo {
-      font-size: 20px;
+      font-size: 22px;
       font-weight: bold;
       color: #000;
       display: flex;
@@ -41,13 +47,17 @@
       text-decoration: none;
       color: #333;
       font-weight: bold;
-      font-size: 15px;
+      font-size: 16px;
       transition: color 0.3s ease;
     }
     nav a:hover, nav a.active {
       color: #007BFF;
     }
 
+    /* Nội dung chính */
+    main {
+      flex: 1;
+    }
     section {
       padding: 2rem;
       background-color: white;
@@ -70,7 +80,7 @@
       margin-bottom: 30px;
     }
 
-    /* Animation fade mượt */
+    /* Animation fade */
     .content {
       display: none;
       opacity: 0;
@@ -83,7 +93,7 @@
       transform: translateY(0);
     }
 
-    /* Box giới thiệu bản thân */
+    /* Box giới thiệu */
     .intro-box {
       display: flex;
       align-items: stretch;
@@ -114,11 +124,19 @@
       text-align: justify;
     }
 
+    /* Hình ảnh ngoại khóa */
+    .activity-img {
+      margin-top: 10px;
+      border-radius: 10px;
+      width: 100%;
+      max-width: 500px;
+    }
+
     /* Footer */
     footer {
       background-color: #2c3e50;
       color: white;
-      padding: 0.7rem 1.5rem;
+      padding: 0.8rem 1.5rem;
     }
     .footer-container {
       display: flex;
@@ -182,59 +200,71 @@
     </nav>
   </header>
 
-  <section id="home" class="content active">
-    <h2>Home</h2>
-    <p>
-      Welcome to my personal page - Duc Minh. This is where I share about my study, research project, and extracurricular activities.
-    </p>
-    <div class="intro-box">
-      <img src="profile-pic.png" alt="Profile Picture" class="profile-pic">
-      <div class="intro-text">
-        <h3>Introduction</h3>
-        <p>Hello! I am Do Duc Minh - Student of Nguyen Hue High School for Gifted Students.  
-           <br><br>
-           I am a passionate learner, driven by a deep curiosity that extends across science, sports, academics, and every field that captures my interest. This inquisitive nature has not only enriched my knowledge but also strengthened my ability to adapt and grow. I strive to learn from those who came before me, embracing both humility and determination, as I firmly believe that 
-           <em><strong>the more I discover, the broader the horizons of my future will become</strong></em>.
-        </p>
+  <main>
+    <section id="home" class="content active">
+      <h2>Home</h2>
+      <p>
+        Welcome to my personal page - Duc Minh. This is where I share about my study, research project, and extracurricular activities.
+      </p>
+      <div class="intro-box">
+        <img src="profile-pic.png" alt="Profile Picture" class="profile-pic">
+        <div class="intro-text">
+          <h3>Introduction</h3>
+          <p>Hello! I am Do Duc Minh - Student of Nguyen Hue High School for Gifted Students.  
+             <br><br>
+             I am a passionate learner, driven by a deep curiosity that extends across science, sports, academics, and every field that captures my interest. This inquisitive nature has not only enriched my knowledge but also strengthened my ability to adapt and grow. I strive to learn from those who came before me, embracing both humility and determination, as I firmly believe that 
+             <em><strong>the more I discover, the broader the horizons of my future will become</strong></em>.
+          </p>
+        </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <section id="extracurricular" class="content">
-    <h2>Hoạt động ngoại khóa</h2>
-    <p>Some of my proud extracurricular achievements:</p>
-    <ul>
-      <li>2024: Giải nhất cuộc thi ICAN 2024</li>
-      <li>2024: Cuộc thi AIGC - Singapore 2025</li>
-    </ul>
-  </section>
+    <section id="extracurricular" class="content">
+      <h2>Hoạt động ngoại khóa</h2>
+      <p>Some of my proud extracurricular achievements:</p>
+      <ul>
+        <li>
+          2024: Giải nhất cuộc thi ICAN 2024
+          <br>
+          <img src="z6850432528537_43a75cfeefc1b443a249f3fd3068cad1.jpg" 
+               alt="Ảnh ICAN 2024" class="activity-img">
+        </li>
+        <li>
+          2024: Cuộc thi AIGC - Singapore 2025
+          <br>
+          <img src="z6850436293266_951cd4fe1da8f55ce2c571f1ec67348e.jpg" 
+               alt="Ảnh AIGC Singapore 2025" class="activity-img">
+        </li>
+      </ul>
+    </section>
 
-  <section id="research" class="content">
-    <h2>Dự án nghiên cứu</h2>
-    <p>My main research interests and projects:</p>
-    <ul>
-      <li>Xử lí rác từ phân vi sinh</li>
-      <li>Chế tạo robot STEAM</li>
-    </ul>
-  </section>
+    <section id="research" class="content">
+      <h2>Dự án nghiên cứu</h2>
+      <p>My main research interests and projects:</p>
+      <ul>
+        <li>Xử lí rác từ phân vi sinh</li>
+        <li>Chế tạo robot STEAM</li>
+      </ul>
+    </section>
 
-  <section id="academic" class="content">
-    <h2>Hoạt động học thuật</h2>
-    <p>Some of my academic works and activities:</p>
-    <ul>
-      <li>Chế tạo động cơ</li>
-      <li>Chế tạo máy hút bụi</li>
-    </ul>
-  </section>
+    <section id="academic" class="content">
+      <h2>Hoạt động học thuật</h2>
+      <p>Some of my academic works and activities:</p>
+      <ul>
+        <li>Chế tạo động cơ</li>
+        <li>Chế tạo máy hút bụi</li>
+      </ul>
+    </section>
 
-  <section id="science" class="content">
-    <h2>Thực hành khoa học</h2>
-    <p>My hands-on science practice experiences:</p>
-    <ul>
-      <li>Thực tập nhà máy thuốc lá</li>
-      <li>Thực tập nhà máy nước sạch</li>
-    </ul>
-  </section>
+    <section id="science" class="content">
+      <h2>Thực hành khoa học</h2>
+      <p>My hands-on science practice experiences:</p>
+      <ul>
+        <li>Thực tập nhà máy thuốc lá</li>
+        <li>Thực tập nhà máy nước sạch</li>
+      </ul>
+    </section>
+  </main>
 
   <footer>
     <div class="footer-container">
@@ -259,7 +289,6 @@
         sec.classList.remove('active');
       });
       document.getElementById(sectionId).classList.add('active');
-      // Không scroll xuống section → header vẫn luôn hiện
     }
   </script>
 </body>
