@@ -4,6 +4,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Profile - Do Duc Minh</title>
+  <!-- Font Awesome cho icon -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -56,40 +58,6 @@
       list-style-type: square;
       padding-left: 20px;
     }
-
-    footer {
-      background-color: #2c3e50;
-      color: white;
-      padding: 2rem 1rem;
-      margin-top: 2rem;
-    }
-    .footer-content {
-      display: flex;
-      justify-content: space-around;
-      flex-wrap: wrap;
-      text-align: center;
-      margin-bottom: 1rem;
-    }
-    .footer-content div {
-      margin: 10px;
-    }
-    .footer-content h4 {
-      margin-bottom: 10px;
-      font-size: 1.2rem;
-    }
-    .footer-content a {
-      color: white;
-      margin: 0 8px;
-      text-decoration: none;
-      font-size: 1.2rem;
-    }
-    .footer-bottom {
-      text-align: center;
-      border-top: 1px solid rgba(255,255,255,0.3);
-      padding-top: 10px;
-      font-size: 14px;
-    }
-
     .content {
       display: none;
       opacity: 0;
@@ -105,6 +73,7 @@
       to { opacity: 1; }
     }
 
+    /* Box giới thiệu bản thân */
     .intro-box {
       display: flex;
       align-items: stretch;
@@ -135,19 +104,55 @@
       text-align: justify;
     }
 
-    @media (max-width: 768px) {
-      .intro-box {
+    /* Footer */
+    footer {
+      background-color: #2c3e50;
+      color: white;
+      padding: 0.7rem 1.5rem;
+    }
+    .footer-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 1100px;
+      margin: auto;
+      flex-wrap: wrap;
+    }
+    .footer-left {
+      display: flex;
+      gap: 25px;
+      font-size: 15px;
+    }
+    .footer-left p {
+      margin: 0;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .footer-left a {
+      color: white;
+      text-decoration: none;
+    }
+    .footer-left a:hover {
+      text-decoration: underline;
+    }
+    .footer-right {
+      font-size: 14px;
+      text-align: right;
+    }
+    .fas {
+      font-size: 16px;
+    }
+    @media (max-width: 600px) {
+      .footer-container {
         flex-direction: column;
         align-items: center;
+        text-align: center;
+        gap: 8px;
       }
-      .profile-pic {
-        width: 100%;
-        height: auto;
-        max-width: 400px;
-      }
-      .footer-content {
+      .footer-left {
         flex-direction: column;
-        align-items: center;
+        gap: 5px;
       }
     }
   </style>
@@ -229,26 +234,18 @@
     </ul>
   </section>
 
+  <!-- Footer -->
   <footer>
-    <div class="footer-content">
-      <div>
-        <h4>Call</h4>
-        <p>+84 869484016</p>
+    <div class="footer-container">
+      <div class="footer-left">
+        <p><i class="fas fa-phone"></i> +84 869484016</p>
+        <p><i class="fas fa-envelope"></i> 
+          <a href="mailto:ducminhcnhers@gmail.com">ducminhcnhers@gmail.com</a>
+        </p>
       </div>
-      <div>
-        <h4>Write</h4>
-        <p><a href="mailto:ducminhcnhers@gmail.com">ducminhcnhers@gmail.com</a></p>
+      <div class="footer-right">
+        <p>&copy; 2025 Do Duc Minh. All rights reserved.</p>
       </div>
-      <div>
-        <h4>Follow</h4>
-        <a href="https://facebook.com" target="_blank">Fb</a>
-        <a href="https://twitter.com" target="_blank">Tw</a>
-        <a href="https://linkedin.com" target="_blank">In</a>
-        <a href="https://instagram.com" target="_blank">Ig</a>
-      </div>
-    </div>
-    <div class="footer-bottom">
-      &copy; 2025 Do Duc Minh. All rights reserved.
     </div>
   </footer>
 
