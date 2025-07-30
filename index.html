@@ -11,6 +11,9 @@
       background-color: #f4f4f4;
       margin: 0; padding: 0;
       color: #333;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
     }
 
     /* Header */
@@ -130,13 +133,23 @@
       text-align: justify;
     }
 
+    /* Footer */
     footer {
-      margin-top: 40px;
+      margin-top: auto;
       background: #2c3e50;
       color: white;
-      text-align: center;
-      padding: 1rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.8rem 2rem;
+      font-size: 14px;
     }
+    .footer-left {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+    .footer-left i { margin-right: 6px; }
   </style>
 </head>
 <body>
@@ -165,7 +178,7 @@
         <h3>Introduction</h3>
         <p>Hello! I am Do Duc Minh - Student of Nguyen Hue High School for Gifted Students.  
         <br><br>
-        I am a passionate learner ...  
+        I am a passionate learner, driven by a deep curiosity that extends across science, sports, academics, and every field that captures my interest. This inquisitive nature has not only enriched my knowledge but also strengthened my ability to adapt and grow. I strive to learn from those who came before me, embracing both humility and determination, as I firmly believe that 
         <em><strong>the more I discover, the broader the horizons of my future will become</strong></em>.
         </p>
       </div>
@@ -211,7 +224,13 @@
   </section>
 
   <footer>
-    &copy; 2025 Do Duc Minh. All rights reserved.
+    <div class="footer-left">
+      <div><i class="fas fa-phone"></i> +84 869 484 016</div>
+      <div><i class="fas fa-envelope"></i> ducminhcnhers@gmail.com</div>
+    </div>
+    <div class="footer-right">
+      &copy; 2025 Do Duc Minh. All rights reserved.
+    </div>
   </footer>
 
   <script>
@@ -233,7 +252,14 @@
       if (input.style.display === 'block') input.focus();
     }
 
+    function resetHighlights() {
+      document.querySelectorAll('section *').forEach(el=>{
+        if (el.innerHTML) el.innerHTML = el.innerHTML.replace(/<mark>|<\/mark>/g,'');
+      });
+    }
+
     function searchContent(query) {
+      resetHighlights();
       const resultsBox = document.querySelector('.search-results');
       resultsBox.innerHTML = '';
       if (!query.trim()) { resultsBox.style.display = 'none'; return; }
@@ -242,7 +268,8 @@
       document.querySelectorAll('section').forEach(sec => {
         sec.querySelectorAll('*').forEach(el=>{
           if (el.innerText && el.innerText.toLowerCase().includes(query.toLowerCase())) {
-            const match = el.innerText.match(new RegExp(query, "i"));
+            const regex = new RegExp(query, "gi");
+            const match = el.innerText.match(regex);
             if (match) {
               results.push({ section: sec.id, keyword: match[0] });
             }
@@ -269,14 +296,14 @@
     }
 
     function highlightAndScroll(keyword) {
+      const regex = new RegExp(`(${keyword})`, 'gi');
+      let firstMark = null;
       document.querySelectorAll('section.active *').forEach(el => {
         if (el.innerHTML) {
-          el.innerHTML = el.innerHTML.replace(/<mark>|<\/mark>/g,'');
-          const regex = new RegExp(`(${keyword})`, 'gi');
           el.innerHTML = el.innerHTML.replace(regex,'<mark>$1</mark>');
+          if (!firstMark) firstMark = el.querySelector('mark');
         }
       });
-      const firstMark = document.querySelector('section.active mark');
       if (firstMark) firstMark.scrollIntoView({behavior:'smooth', block:'center'});
     }
   </script>
