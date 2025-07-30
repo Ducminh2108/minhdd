@@ -231,14 +231,12 @@
     <div class="footer-right">&copy; 2025 Do Duc Minh</div>
   </footer>
 <script>
-  // Toggle section
   function showSection(sectionId) {
     document.querySelectorAll('.content').forEach(sec => sec.classList.remove('active'));
     document.getElementById(sectionId).classList.add('active');
     removeHighlights();
   }
 
-  // Toggle search box
   function toggleSearch() {
     const box = document.getElementById("searchBox");
     box.style.display = box.style.display === "block" ? "none" : "block";
@@ -247,7 +245,6 @@
     removeHighlights();
   }
 
-  // Hide search when click outside
   document.addEventListener("click", function(event) {
     const box = document.getElementById("searchBox");
     const icon = document.querySelector(".search-icon");
@@ -256,7 +253,6 @@
     }
   });
 
-  // Search suggestions
   function showSuggestions(query) {
     const suggestionsBox = document.getElementById("suggestions");
     const sections = document.querySelectorAll("section");
@@ -268,9 +264,13 @@
     let results = [];
     sections.forEach(sec => {
       if (sec.innerText.toLowerCase().includes(query.toLowerCase())) {
+        // tìm vị trí match đầu tiên
+        const idx = sec.innerText.toLowerCase().indexOf(query.toLowerCase());
+        const snippet = sec.innerText.substring(idx, idx + query.length + 20);
         results.push({
           id: sec.id,
-          text: sec.querySelector("h2").innerText
+          keyword: query,
+          context: snippet + "..."
         });
       }
     });
@@ -280,14 +280,13 @@
     } else {
       results.forEach(r => {
         const div = document.createElement("div");
-        div.innerText = r.text;
-        div.onclick = () => highlightAndShow(r.id, query);
+        div.innerHTML = `<strong>${r.keyword}</strong> - ${r.context}`;
+        div.onclick = () => highlightAndShow(r.id, r.keyword);
         suggestionsBox.appendChild(div);
       });
     }
   }
 
-  // Khi chọn suggestion → mở section & highlight từ khóa
   function highlightAndShow(sectionId, keyword) {
     showSection(sectionId);
     const section = document.getElementById(sectionId);
@@ -295,7 +294,6 @@
     document.getElementById("searchBox").style.display = "none";
   }
 
-  // Highlight keyword
   function highlightText(section, keyword) {
     const regex = new RegExp(`(${keyword})`, "gi");
     section.querySelectorAll("*:not(script):not(style)").forEach(node => {
@@ -311,7 +309,6 @@
     });
   }
 
-  // Reset highlight
   function removeHighlights() {
     document.querySelectorAll("mark").forEach(el => {
       el.outerHTML = el.innerText;
@@ -320,6 +317,7 @@
 
   document.addEventListener('DOMContentLoaded', () => showSection('home'));
 </script>
+
 
   
 </body>
