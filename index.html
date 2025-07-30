@@ -1,311 +1,92 @@
-<!DOCTYPE html>
-<html lang="vi">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Profile - Do Duc Minh</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #f4f4f4;
-      margin: 0; padding: 0;
-      color: #333;
-      display: flex;
-      flex-direction: column;
-      min-height: 100vh;
-    }
+<script>
+  function showSection(id) {
+    document.querySelectorAll('section').forEach(sec=>{
+      sec.classList.remove('active');
+      sec.style.display = 'none';
+    });
+    const target = document.getElementById(id);
+    target.style.display = 'block';
+    setTimeout(()=>target.classList.add('active'),10);
+    window.scrollTo({top:0, behavior:'smooth'});
+  }
 
-    /* Header */
-    header {
-      background: #fff;
-      padding: 0.8rem 2rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      border-bottom: 1px solid #ddd;
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-    }
-    .logo { font-size: 20px; font-weight: bold; display: flex; align-items: center; }
-    .logo div { width:14px; height:14px; background:#007BFF; margin-right:6px; }
+  function toggleSearch() {
+    const input = document.querySelector('.search-input');
+    const results = document.querySelector('.search-results');
 
-    nav { display: flex; align-items: center; gap: 20px; }
-    nav a {
-      text-decoration: none;
-      color: #333;
-      font-weight: bold;
-      font-size: 15px;
-      transition: color 0.3s ease;
+    if (input.style.display === 'block') {
+      input.style.display = 'none';
+      results.style.display = 'none';
+    } else {
+      input.style.display = 'block';
+      input.focus();
     }
-    nav a:hover, nav a.active { color: #007BFF; }
+  }
 
-    /* Search */
-    .search-container { position: relative; }
-    .search-icon { font-size: 18px; cursor: pointer; }
-    .search-input {
-      display: none;
-      position: absolute;
-      top: 40px; right: 0;
-      width: 250px; padding: 8px;
-      border: 1px solid #ccc;
-      border-radius: 6px;
-      font-size: 14px;
-      background: #fff;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
-    }
-    .search-results {
-      display: none;
-      position: absolute;
-      top: 70px; right: 0;
-      width: 250px;
-      background: white;
-      border: 1px solid #ccc;
-      border-radius: 6px;
-      max-height: 200px;
-      overflow-y: auto;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
-    }
-    .search-results div {
-      padding: 8px;
-      cursor: pointer;
-      font-size: 14px;
-    }
-    .search-results div:hover { background-color: #f0f0f0; }
+  function resetHighlights() {
+    document.querySelectorAll('section *').forEach(el=>{
+      if (el.innerHTML) el.innerHTML = el.innerHTML.replace(/<mark>|<\/mark>/g,'');
+    });
+  }
 
-    mark {
-      background: #3EB489;
-      color: black;
-      padding: 0 2px;
-      border-radius: 3px;
-    }
+  function searchContent(query) {
+    resetHighlights();
+    const resultsBox = document.querySelector('.search-results');
+    resultsBox.innerHTML = '';
+    if (!query.trim()) { resultsBox.style.display = 'none'; return; }
 
-    /* Section */
-    section {
-      display: none;
-      opacity: 0;
-      transition: opacity 0.5s ease-in-out;
-      padding: 2rem;
-      background-color: white;
-      margin: 1rem auto;
-      max-width: 900px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-      border-radius: 8px;
-    }
-    section.active {
-      display: block;
-      opacity: 1;
-    }
-
-    section h2 {
-      text-align: center;
-      font-size: 2rem;
-      margin-bottom: 20px;
-    }
-    section > p {
-      text-align: center;
-      font-size: 18px;
-      margin-bottom: 20px;
-    }
-
-    /* Intro Box */
-    .intro-box {
-      display: flex;
-      gap: 30px;
-      background-color: white;
-      padding: 25px;
-      border-radius: 10px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-      max-width: 900px;
-      margin: 20px auto 0 auto;
-    }
-    .profile-pic {
-      max-width: 320px;
-      border-radius: 12px;
-      object-fit: cover;
-      flex-shrink: 0;
-    }
-    .intro-text { flex: 1; }
-    .intro-text p {
-      font-size: 17px;
-      line-height: 1.7;
-      text-align: justify;
-    }
-
-    /* Footer */
-    footer {
-      margin-top: auto;
-      background: #2c3e50;
-      color: white;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 0.8rem 2rem;
-      font-size: 14px;
-    }
-    .footer-left {
-      display: flex;
-      align-items: center;
-      gap: 20px;
-    }
-    .footer-left i { margin-right: 6px; }
-  </style>
-</head>
-<body>
-  <header>
-    <div class="logo"><div></div> Do Duc Minh</div>
-    <nav>
-      <a href="#home" onclick="showSection('home')">Home</a>
-      <a href="#extracurricular" onclick="showSection('extracurricular')">Hoạt động ngoại khóa</a>
-      <a href="#research" onclick="showSection('research')">Research</a>
-      <a href="#academic" onclick="showSection('academic')">Academic</a>
-      <a href="#science" onclick="showSection('science')">Science</a>
-      <div class="search-container">
-        <i class="fas fa-search search-icon" onclick="toggleSearch()"></i>
-        <input type="text" class="search-input" placeholder="Search..." onkeyup="searchContent(this.value)">
-        <div class="search-results"></div>
-      </div>
-    </nav>
-  </header>
-
-  <section id="home" class="active">
-    <h2>Home</h2>
-    <p>Welcome to my personal page - Duc Minh.</p>
-    <div class="intro-box">
-      <img src="profile-pic.png" class="profile-pic">
-      <div class="intro-text">
-        <h3>Introduction</h3>
-        <p>Hello! I am Do Duc Minh - Student of Nguyen Hue High School for Gifted Students.  
-        <br><br>
-        I am a passionate learner, driven by a deep curiosity that extends across science, sports, academics, and every field that captures my interest. This inquisitive nature has not only enriched my knowledge but also strengthened my ability to adapt and grow. I strive to learn from those who came before me, embracing both humility and determination, as I firmly believe that 
-        <em><strong>the more I discover, the broader the horizons of my future will become</strong></em>.
-        </p>
-      </div>
-    </div>
-  </section>
-
-  <section id="extracurricular">
-    <h2>Hoạt động ngoại khóa</h2>
-    <ul>
-      <li>
-        2024: Giải nhất cuộc thi ICAN 2024
-        <br><img src="z6850432528537_43a75cfeefc1b443a249f3fd3068cad1.jpg" width="500">
-      </li>
-      <li>
-        2024: Cuộc thi AIGC - Singapore 2025
-        <br><img src="z6850436293266_951cd4fe1da8f55ce2c571f1ec67348e.jpg" width="500">
-      </li>
-    </ul>
-  </section>
-
-  <section id="research">
-    <h2>Dự án nghiên cứu</h2>
-    <ul>
-      <li>Xử lí rác từ phân vi sinh</li>
-      <li>Chế tạo robot STEAM</li>
-    </ul>
-  </section>
-
-  <section id="academic">
-    <h2>Hoạt động học thuật</h2>
-    <ul>
-      <li>Chế tạo động cơ</li>
-      <li>Chế tạo máy hút bụi</li>
-    </ul>
-  </section>
-
-  <section id="science">
-    <h2>Thực hành khoa học</h2>
-    <ul>
-      <li>Thực tập nhà máy thuốc lá</li>
-      <li>Thực tập nhà máy nước sạch</li>
-    </ul>
-  </section>
-
-  <footer>
-    <div class="footer-left">
-      <div><i class="fas fa-phone"></i> +84 869 484 016</div>
-      <div><i class="fas fa-envelope"></i> ducminhcnhers@gmail.com</div>
-    </div>
-    <div class="footer-right">
-      &copy; 2025 Do Duc Minh. All rights reserved.
-    </div>
-  </footer>
-
-  <script>
-    function showSection(id) {
-      document.querySelectorAll('section').forEach(sec=>{
-        sec.classList.remove('active');
-        sec.style.display = 'none';
-      });
-      const target = document.getElementById(id);
-      target.style.display = 'block';
-      setTimeout(()=>target.classList.add('active'),10);
-      window.scrollTo({top:0, behavior:'smooth'});
-    }
-
-    function toggleSearch() {
-      const input = document.querySelector('.search-input');
-      input.style.display = input.style.display === 'block' ? 'none' : 'block';
-      document.querySelector('.search-results').style.display = 'none';
-      if (input.style.display === 'block') input.focus();
-    }
-
-    function resetHighlights() {
-      document.querySelectorAll('section *').forEach(el=>{
-        if (el.innerHTML) el.innerHTML = el.innerHTML.replace(/<mark>|<\/mark>/g,'');
-      });
-    }
-
-    function searchContent(query) {
-      resetHighlights();
-      const resultsBox = document.querySelector('.search-results');
-      resultsBox.innerHTML = '';
-      if (!query.trim()) { resultsBox.style.display = 'none'; return; }
-
-      let results = [];
-      document.querySelectorAll('section').forEach(sec => {
-        sec.querySelectorAll('*').forEach(el=>{
-          if (el.innerText && el.innerText.toLowerCase().includes(query.toLowerCase())) {
-            const regex = new RegExp(query, "gi");
-            const match = el.innerText.match(regex);
-            if (match) {
-              results.push({ section: sec.id, keyword: match[0] });
-            }
+    let results = [];
+    document.querySelectorAll('section').forEach(sec => {
+      sec.querySelectorAll('*').forEach(el=>{
+        if (el.innerText && el.innerText.toLowerCase().includes(query.toLowerCase())) {
+          const regex = new RegExp(query, "gi");
+          const match = el.innerText.match(regex);
+          if (match) {
+            results.push({ section: sec.id, keyword: match[0] });
           }
-        });
-      });
-
-      if (results.length === 0) {
-        resultsBox.innerHTML = '<div>No results found</div>';
-      } else {
-        results = [...new Map(results.map(r => [r.keyword.toLowerCase(), r])).values()];
-        results.slice(0,5).forEach(r => {
-          const div = document.createElement('div');
-          div.innerText = r.keyword;
-          div.onclick = () => {
-            showSection(r.section);
-            setTimeout(()=>highlightAndScroll(r.keyword),500);
-            resultsBox.style.display = 'none';
-          };
-          resultsBox.appendChild(div);
-        });
-      }
-      resultsBox.style.display = 'block';
-    }
-
-    function highlightAndScroll(keyword) {
-      const regex = new RegExp(`(${keyword})`, 'gi');
-      let firstMark = null;
-      document.querySelectorAll('section.active *').forEach(el => {
-        if (el.innerHTML) {
-          el.innerHTML = el.innerHTML.replace(regex,'<mark>$1</mark>');
-          if (!firstMark) firstMark = el.querySelector('mark');
         }
       });
-      if (firstMark) firstMark.scrollIntoView({behavior:'smooth', block:'center'});
+    });
+
+    if (results.length === 0) {
+      resultsBox.innerHTML = '<div>No results found</div>';
+    } else {
+      results = [...new Map(results.map(r => [r.keyword.toLowerCase(), r])).values()];
+      results.slice(0,5).forEach(r => {
+        const div = document.createElement('div');
+        div.innerText = r.keyword;
+        div.onclick = () => {
+          showSection(r.section);
+          setTimeout(()=>highlightAndScroll(r.keyword),500);
+          resultsBox.style.display = 'none';
+          document.querySelector('.search-input').style.display = 'none';
+        };
+        resultsBox.appendChild(div);
+      });
     }
-  </script>
-</body>
-</html>
+    resultsBox.style.display = 'block';
+  }
+
+  function highlightAndScroll(keyword) {
+    const regex = new RegExp(`(${keyword})`, 'gi');
+    let firstMark = null;
+    document.querySelectorAll('section.active *').forEach(el => {
+      if (el.innerHTML) {
+        el.innerHTML = el.innerHTML.replace(regex,'<mark>$1</mark>');
+        if (!firstMark) firstMark = el.querySelector('mark');
+      }
+    });
+    if (firstMark) firstMark.scrollIntoView({behavior:'smooth', block:'center'});
+  }
+
+  // 👇 Thêm đoạn này để click ra ngoài thì ẩn search
+  document.addEventListener('click', function(event) {
+    const searchContainer = document.querySelector('.search-container');
+    const searchInput = document.querySelector('.search-input');
+    const searchResults = document.querySelector('.search-results');
+    if (!searchContainer.contains(event.target)) {
+      searchInput.style.display = 'none';
+      searchResults.style.display = 'none';
+    }
+  });
+</script>
