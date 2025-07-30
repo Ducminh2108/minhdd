@@ -37,7 +37,21 @@
       box-shadow: 0 2px 5px rgba(0,0,0,0.1);
       border-radius: 8px;
     }
-    h2, h3 {
+    /* Tiêu đề các section */
+    section h2 {
+      text-align: center;
+      font-size: 2.2rem;
+      font-weight: bold;
+      color: #2c3e50;
+      margin-bottom: 20px;
+    }
+    /* Đoạn mô tả ngay dưới h2 (chỉ đoạn đầu tiên của section) */
+    section > p {
+      text-align: center;
+      font-size: 18px;
+      margin-bottom: 30px;
+    }
+    h3 {
       color: #2c3e50;
     }
     ul {
@@ -69,7 +83,7 @@
     /* Box giới thiệu bản thân */
     .intro-box {
       display: flex;
-      align-items: stretch; /* để ảnh cao bằng khối text */
+      align-items: stretch;
       justify-content: flex-start;
       background-color: white;
       padding: 25px;
@@ -81,8 +95,8 @@
     }
     .profile-pic {
       width: auto;
-      height: 100%; /* tự co giãn theo chiều cao intro-text */
-      max-width: 320px; /* tránh ảnh quá rộng */
+      height: 100%;
+      max-width: 320px;
       border-radius: 12px;
       object-fit: cover;
       flex-shrink: 0;
@@ -125,25 +139,27 @@
   </nav>
 
   <section id="home" class="content active">
-    <!-- Box Home gốc -->
     <h2>Home</h2>
-    <p>Welcome to my personal page - Duc Minh. This is where I share about my study, research project, and extracurricular activities.</p>
+    <p>
+      Welcome to my personal page - Duc Minh. This is where I share about my study, research project, and extracurricular activities.
+    </p>
 
-    <!-- Box giới thiệu bản thân -->
     <div class="intro-box">
       <img src="profile-pic.png" alt="Profile Picture" class="profile-pic">
       <div class="intro-text">
         <h3>Introduction</h3>
         <p>Hello! I am Do Duc Minh - Student of Nguyen Hue High School for Gifted Students.  
            <br><br>
-           I am a passionate learner, driven by a deep curiosity that extends across science, sports, academics, and every field that captures my interest. This inquisitive nature has not only enriched my knowledge but also strengthened my ability to adapt and grow. I strive to learn from those who came before me, embracing both humility and determination, as I firmly believe that <em><strong>the more I discover, the broader the horizons of my future will become</strong></em>..
-</p>
+           I am a passionate learner, driven by a deep curiosity that extends across science, sports, academics, and every field that captures my interest. This inquisitive nature has not only enriched my knowledge but also strengthened my ability to adapt and grow. I strive to learn from those who came before me, embracing both humility and determination, as I firmly believe that 
+           <em><strong>the more I discover, the broader the horizons of my future will become</strong></em>.
+        </p>
       </div>
     </div>
   </section>
 
   <section id="extracurricular" class="content">
     <h2>Hoạt động ngoại khóa</h2>
+    <p>Some of my proud extracurricular achievements:</p>
     <ul>
       <li>
         2024: Giải nhất cuộc thi ICAN 2024
@@ -162,6 +178,7 @@
 
   <section id="research" class="content">
     <h2>Dự án nghiên cứu</h2>
+    <p>My main research interests and projects:</p>
     <ul>
       <li>Xử lí rác từ phân vi sinh</li>
       <li>Chế tạo robot STEAM</li>
@@ -170,6 +187,7 @@
 
   <section id="academic" class="content">
     <h2>Hoạt động học thuật</h2>
+    <p>Some of my academic works and activities:</p>
     <ul>
       <li>Chế tạo động cơ</li>
       <li>Chế tạo máy hút bụi</li>
@@ -178,6 +196,7 @@
 
   <section id="science" class="content">
     <h2>Thực hành khoa học</h2>
+    <p>My hands-on science practice experiences:</p>
     <ul>
       <li>Thực tập nhà máy thuốc lá</li>
       <li>Thực tập nhà máy nước sạch</li>
@@ -186,6 +205,7 @@
 
   <section id="contact" class="content">
     <h2>Liên hệ</h2>
+    <p>You can contact me through:</p>
     <ul>
       <li>Email: ducminhcnhers@gmail.com</li>
       <li>Mobile: +84869484016</li>
