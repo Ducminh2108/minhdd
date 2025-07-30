@@ -242,7 +242,10 @@
       document.querySelectorAll('section').forEach(sec => {
         sec.querySelectorAll('*').forEach(el=>{
           if (el.innerText && el.innerText.toLowerCase().includes(query.toLowerCase())) {
-            results.push({ section: sec.id, snippet: el.innerText });
+            const match = el.innerText.match(new RegExp(query, "i"));
+            if (match) {
+              results.push({ section: sec.id, keyword: match[0] });
+            }
           }
         });
       });
@@ -250,12 +253,13 @@
       if (results.length === 0) {
         resultsBox.innerHTML = '<div>No results found</div>';
       } else {
+        results = [...new Map(results.map(r => [r.keyword.toLowerCase(), r])).values()];
         results.slice(0,5).forEach(r => {
           const div = document.createElement('div');
-          div.innerText = r.snippet.slice(0,80)+"...";
+          div.innerText = r.keyword;
           div.onclick = () => {
             showSection(r.section);
-            setTimeout(()=>highlightAndScroll(query),500);
+            setTimeout(()=>highlightAndScroll(r.keyword),500);
             resultsBox.style.display = 'none';
           };
           resultsBox.appendChild(div);
@@ -264,11 +268,11 @@
       resultsBox.style.display = 'block';
     }
 
-    function highlightAndScroll(query) {
+    function highlightAndScroll(keyword) {
       document.querySelectorAll('section.active *').forEach(el => {
         if (el.innerHTML) {
           el.innerHTML = el.innerHTML.replace(/<mark>|<\/mark>/g,'');
-          const regex = new RegExp(`(${query})`, 'gi');
+          const regex = new RegExp(`(${keyword})`, 'gi');
           el.innerHTML = el.innerHTML.replace(regex,'<mark>$1</mark>');
         }
       });
