@@ -11,18 +11,14 @@
       padding: 0;
       background-color: #f4f4f4;
       color: #333;
+      overflow-x: hidden; /* chống scroll ngang */
     }
     header {
       background-color: #2c3e50;
       color: white;
-      padding: 0.7rem 1rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    header h1 {
-      font-size: 1.4rem;
-      margin: 0;
+      padding: 1rem;
+      text-align: center;
+      position: relative;
     }
     nav {
       background-color: #34495e;
@@ -133,8 +129,12 @@
       .intro-box { flex-direction: column; align-items: center; }
       .profile-pic { width: 100%; height: auto; max-width: 400px; }
     }
+
+    /* Search */
     .search-container {
-      position: relative;
+      position: absolute;
+      top: 15px;
+      right: 20px;
     }
     .search-icon {
       cursor: pointer;
@@ -143,9 +143,7 @@
     }
     .search-input {
       display: none;
-      position: absolute;
-      top: 40px;
-      right: 0;
+      margin-top: 10px;
       width: 220px;
       padding: 8px;
       border: 1px solid #ccc;
@@ -155,7 +153,7 @@
     .search-results {
       display: none;
       position: absolute;
-      top: 70px;
+      top: 55px;
       right: 0;
       background: white;
       border: 1px solid #ccc;
@@ -205,7 +203,7 @@
         <h3>Introduction</h3>
         <p>Hello! I am Do Duc Minh - Student of Nguyen Hue High School for Gifted Students.  
            <br><br>
-           I am a passionate learner, driven by a deep curiosity across science, sports, academics, and every field that captures my interest. This inquisitive nature has enriched my knowledge and strengthened my adaptability. I strive to learn with humility and determination, as I firmly believe that 
+           I am a passionate learner... 
            <em><strong>the more I discover, the broader the horizons of my future will become</strong></em>.
         </p>
       </div>
@@ -214,26 +212,20 @@
 
   <section id="extracurricular" class="content">
     <h2>Hoạt động ngoại khóa</h2>
-    <p>Some of my proud extracurricular achievements:</p>
     <ul>
       <li>
-        2024: Giải nhất cuộc thi ICAN 2024
-        <br>
-        <img src="z6850432528537_43a75cfeefc1b443a249f3fd3068cad1.jpg" 
-             alt="Ảnh ICAN 2024" width="500" style="margin-top:10px; border-radius:10px;">
+        2024: Giải nhất cuộc thi ICAN 2024<br>
+        <img src="z6850432528537_43a75cfeefc1b443a249f3fd3068cad1.jpg" width="500">
       </li>
       <li>
-        2024: Cuộc thi AIGC - Singapore 2025
-        <br>
-        <img src="z6850436293266_951cd4fe1da8f55ce2c571f1ec67348e.jpg" 
-             alt="Ảnh AIGC Singapore 2025" width="500" style="margin-top:10px; border-radius:10px;">
+        2024: Cuộc thi AIGC - Singapore 2025<br>
+        <img src="z6850436293266_951cd4fe1da8f55ce2c571f1ec67348e.jpg" width="500">
       </li>
     </ul>
   </section>
 
   <section id="research" class="content">
     <h2>Dự án nghiên cứu</h2>
-    <p>My main research interests and projects:</p>
     <ul>
       <li>Xử lí rác từ phân vi sinh</li>
       <li>Chế tạo robot STEAM</li>
@@ -242,7 +234,6 @@
 
   <section id="academic" class="content">
     <h2>Hoạt động học thuật</h2>
-    <p>Some of my academic works and activities:</p>
     <ul>
       <li>Chế tạo động cơ</li>
       <li>Chế tạo máy hút bụi</li>
@@ -251,7 +242,6 @@
 
   <section id="science" class="content">
     <h2>Thực hành khoa học</h2>
-    <p>My hands-on science practice experiences:</p>
     <ul>
       <li>Thực tập nhà máy thuốc lá</li>
       <li>Thực tập nhà máy nước sạch</li>
@@ -308,9 +298,7 @@
           if (el.innerText && el.innerText.toLowerCase().includes(query.toLowerCase())) {
             const regex = new RegExp(query, "gi");
             const match = el.innerText.match(regex);
-            if (match) {
-              results.push({ section: sec.id, keyword: match[0] });
-            }
+            if (match) results.push({ section: sec.id, keyword: match[0] });
           }
         });
       });
@@ -348,11 +336,9 @@
 
     document.addEventListener('click', function(event) {
       const searchContainer = document.querySelector('.search-container');
-      const searchInput = document.querySelector('.search-input');
-      const searchResults = document.querySelector('.search-results');
       if (!searchContainer.contains(event.target)) {
-        searchInput.style.display = 'none';
-        searchResults.style.display = 'none';
+        document.querySelector('.search-input').style.display = 'none';
+        document.querySelector('.search-results').style.display = 'none';
       }
     });
   </script>
