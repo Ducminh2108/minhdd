@@ -14,23 +14,40 @@
       background-color: #f4f4f4;
       color: #333;
     }
+    /* Header */
     header {
-      background-color: #2c3e50;
-      color: white;
-      padding: 1rem;
-      text-align: center;
+      background-color: #fff;
+      padding: 0.8rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid #ddd;
+      position: sticky;
+      top: 0;
+      z-index: 999;
     }
-    nav {
-      background-color: #34495e;
-      padding: 0.5rem;
-      text-align: center;
+    .logo {
+      font-size: 20px;
+      font-weight: bold;
+      color: #000;
+      display: flex;
+      align-items: center;
+    }
+    .logo span {
+      margin-left: 8px;
     }
     nav a {
-      color: white;
       margin: 0 15px;
       text-decoration: none;
+      color: #333;
       font-weight: bold;
+      font-size: 15px;
+      transition: color 0.3s ease;
     }
+    nav a:hover, nav a.active {
+      color: #007BFF;
+    }
+
     section {
       padding: 2rem;
       background-color: white;
@@ -38,6 +55,7 @@
       max-width: 900px;
       box-shadow: 0 2px 5px rgba(0,0,0,0.1);
       border-radius: 8px;
+      min-height: 300px;
     }
     section h2 {
       text-align: center;
@@ -51,26 +69,18 @@
       font-size: 18px;
       margin-bottom: 30px;
     }
-    h3 {
-      color: #2c3e50;
-    }
-    ul {
-      list-style-type: square;
-      padding-left: 20px;
-    }
+
+    /* Animation fade mượt */
     .content {
       display: none;
       opacity: 0;
-      transition: opacity 0.7s ease-in-out;
+      transform: translateY(15px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
     }
     .content.active {
       display: block;
       opacity: 1;
-      animation: fadeIn 0.7s ease-in-out;
-    }
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
+      transform: translateY(0);
     }
 
     /* Box giới thiệu bản thân */
@@ -159,22 +169,24 @@
 </head>
 <body>
   <header>
-    <h1>Do Duc Minh's Profile</h1>
+    <div class="logo">
+      <div style="width:14px; height:14px; background:#007BFF; margin-right:6px;"></div>
+      <span>Do Duc Minh</span>
+    </div>
+    <nav>
+      <a href="#home" onclick="showSection('home', event)">Home</a>
+      <a href="#extracurricular" onclick="showSection('extracurricular', event)">Hoạt động ngoại khóa</a>
+      <a href="#research" onclick="showSection('research', event)">Research Project</a>
+      <a href="#academic" onclick="showSection('academic', event)">Academic activities</a>
+      <a href="#science" onclick="showSection('science', event)">Thực hành khoa học</a>
+    </nav>
   </header>
-  <nav>
-    <a href="#home" onclick="showSection('home')">Home</a>
-    <a href="#extracurricular" onclick="showSection('extracurricular')">Hoạt động ngoại khóa</a>
-    <a href="#research" onclick="showSection('research')">Research Project</a>
-    <a href="#academic" onclick="showSection('academic')">Academic activities</a>
-    <a href="#science" onclick="showSection('science')">Thực hành khoa học</a>
-  </nav>
 
   <section id="home" class="content active">
     <h2>Home</h2>
     <p>
       Welcome to my personal page - Duc Minh. This is where I share about my study, research project, and extracurricular activities.
     </p>
-
     <div class="intro-box">
       <img src="profile-pic.png" alt="Profile Picture" class="profile-pic">
       <div class="intro-text">
@@ -192,18 +204,8 @@
     <h2>Hoạt động ngoại khóa</h2>
     <p>Some of my proud extracurricular achievements:</p>
     <ul>
-      <li>
-        2024: Giải nhất cuộc thi ICAN 2024
-        <br>
-        <img src="z6850432528537_43a75cfeefc1b443a249f3fd3068cad1.jpg" 
-             alt="Ảnh ICAN 2024" width="500" style="margin-top:10px; border-radius:10px;">
-      </li>
-      <li>
-        2024: Cuộc thi AIGC - Singapore 2025
-        <br>
-        <img src="z6850436293266_951cd4fe1da8f55ce2c571f1ec67348e.jpg" 
-             alt="Ảnh AIGC Singapore 2025" width="500" style="margin-top:10px; border-radius:10px;">
-      </li>
+      <li>2024: Giải nhất cuộc thi ICAN 2024</li>
+      <li>2024: Cuộc thi AIGC - Singapore 2025</li>
     </ul>
   </section>
 
@@ -234,7 +236,6 @@
     </ul>
   </section>
 
-  <!-- Footer -->
   <footer>
     <div class="footer-container">
       <div class="footer-left">
@@ -250,15 +251,16 @@
   </footer>
 
   <script>
-    function showSection(sectionId) {
+    function showSection(sectionId, event) {
+      event.preventDefault();
+      document.querySelectorAll('nav a').forEach(link => link.classList.remove('active'));
+      event.target.classList.add('active');
       document.querySelectorAll('.content').forEach(sec => {
         sec.classList.remove('active');
       });
       document.getElementById(sectionId).classList.add('active');
+      // Không scroll xuống section → header vẫn luôn hiện
     }
-    document.addEventListener('DOMContentLoaded', function() {
-      showSection('home');
-    });
   </script>
 </body>
 </html>
