@@ -10,27 +10,28 @@
       font-family: Arial, sans-serif;
       margin: 0;
       padding: 0;
-      background: #f9f9f9;
+      background-color: #f4f4f4;
+      color: #333;
       display: flex;
       flex-direction: column;
       min-height: 100vh;
     }
+
     /* HEADER */
     header {
       display: flex;
       justify-content: space-between;
       align-items: center;
       background: #fff;
-      padding: 10px 40px;
+      padding: 12px 40px;
       box-shadow: 0 2px 4px rgba(0,0,0,0.1);
       position: sticky;
       top: 0;
       z-index: 999;
     }
-    header .logo {
+    .logo {
       font-size: 20px;
       font-weight: bold;
-      color: #000;
     }
     nav a {
       margin: 0 12px;
@@ -41,6 +42,7 @@
     nav a:hover {
       color: #3498db;
     }
+
     /* SEARCH */
     .search-container {
       position: relative;
@@ -80,33 +82,59 @@
       background: #f0f0f0;
     }
     mark {
-      background: #aaf0d1; /* mint highlight */
+      background: #aaf0d1;
       color: black;
     }
+
     /* SECTION */
     section {
-      padding: 40px 20px;
-      max-width: 1000px;
-      margin: auto;
-      background: #fff;
+      padding: 2rem;
+      background-color: white;
+      margin: 1rem auto;
+      max-width: 900px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
       border-radius: 8px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-      margin-top: 20px;
+      display: none;
+      opacity: 0;
+      transition: opacity 0.7s ease-in-out;
+    }
+    section.active {
+      display: block;
+      opacity: 1;
     }
     section h2 {
       text-align: center;
-      margin-bottom: 20px;
+      font-size: 2rem;
+      font-weight: bold;
       color: #2c3e50;
+      margin-bottom: 20px;
     }
+
+    .intro-box {
+      display: flex;
+      align-items: flex-start;
+      gap: 30px;
+    }
+    .profile-pic {
+      max-width: 280px;
+      border-radius: 12px;
+      object-fit: cover;
+    }
+    .intro-text p {
+      font-size: 17px;
+      line-height: 1.7;
+      text-align: justify;
+    }
+
     /* FOOTER */
     footer {
-      margin-top: auto;
       background: #2c3e50;
       color: white;
       padding: 15px 40px;
       display: flex;
       justify-content: space-between;
       align-items: center;
+      margin-top: auto;
     }
     .footer-left i {
       margin-right: 8px;
@@ -120,11 +148,11 @@
   <header>
     <div class="logo">Do Duc Minh / Student</div>
     <nav>
-      <a href="#home">HOME</a>
-      <a href="#extracurricular">EXTRACURRICULAR</a>
-      <a href="#research">RESEARCH</a>
-      <a href="#academic">ACADEMIC</a>
-      <a href="#science">SCIENCE</a>
+      <a href="#home" onclick="showSection('home')">HOME</a>
+      <a href="#extracurricular" onclick="showSection('extracurricular')">EXTRACURRICULAR</a>
+      <a href="#research" onclick="showSection('research')">RESEARCH</a>
+      <a href="#academic" onclick="showSection('academic')">ACADEMIC</a>
+      <a href="#science" onclick="showSection('science')">SCIENCE</a>
     </nav>
     <div class="search-container">
       <i class="fas fa-search search-icon" onclick="toggleSearch()"></i>
@@ -135,14 +163,26 @@
     </div>
   </header>
 
-  <section id="home">
+  <!-- HOME -->
+  <section id="home" class="content active">
     <h2>Home</h2>
-    <p>Hello! I am Do Duc Minh - Student of Nguyen Hue High School for Gifted Students.</p>
-    <img src="profile-pic.png" alt="My photo" width="200">
+    <div class="intro-box">
+      <img src="profile-pic.png" alt="Profile Picture" class="profile-pic">
+      <div class="intro-text">
+        <h3>Introduction</h3>
+        <p>
+          Hello! I am Do Duc Minh - Student of Nguyen Hue High School for Gifted Students.  
+          <br><br>
+          I am a passionate learner, driven by a deep curiosity that extends across science, sports, academics, and every field that captures my interest. This inquisitive nature has enriched my knowledge and strengthened my ability to adapt and grow.  
+          <em><strong>The more I discover, the broader the horizons of my future will become.</strong></em>
+        </p>
+      </div>
+    </div>
   </section>
 
-  <section id="extracurricular">
-    <h2>Extracurricular</h2>
+  <!-- EXTRACURRICULAR -->
+  <section id="extracurricular" class="content">
+    <h2>Hoạt động ngoại khóa</h2>
     <ul>
       <li>
         2024: Giải nhất cuộc thi ICAN 2024
@@ -155,21 +195,34 @@
     </ul>
   </section>
 
-  <section id="research">
-    <h2>Research</h2>
-    <p>Main research projects: xử lí rác từ phân vi sinh, chế tạo robot STEAM.</p>
+  <!-- RESEARCH -->
+  <section id="research" class="content">
+    <h2>Dự án nghiên cứu</h2>
+    <ul>
+      <li>Xử lí rác từ phân vi sinh</li>
+      <li>Chế tạo robot STEAM</li>
+    </ul>
   </section>
 
-  <section id="academic">
-    <h2>Academic</h2>
-    <p>Hoạt động học thuật: chế tạo động cơ, chế tạo máy hút bụi.</p>
+  <!-- ACADEMIC -->
+  <section id="academic" class="content">
+    <h2>Hoạt động học thuật</h2>
+    <ul>
+      <li>Chế tạo động cơ</li>
+      <li>Chế tạo máy hút bụi</li>
+    </ul>
   </section>
 
-  <section id="science">
-    <h2>Science</h2>
-    <p>Thực hành khoa học: thực tập nhà máy thuốc lá, thực tập nhà máy nước sạch.</p>
+  <!-- SCIENCE -->
+  <section id="science" class="content">
+    <h2>Thực hành khoa học</h2>
+    <ul>
+      <li>Thực tập nhà máy thuốc lá</li>
+      <li>Thực tập nhà máy nước sạch</li>
+    </ul>
   </section>
 
+  <!-- FOOTER -->
   <footer>
     <div class="footer-left">
       <span><i class="fas fa-phone"></i> +84 869484016</span>
@@ -179,11 +232,19 @@
   </footer>
 
   <script>
+    // Toggle section
+    function showSection(sectionId) {
+      document.querySelectorAll('.content').forEach(sec => sec.classList.remove('active'));
+      document.getElementById(sectionId).classList.add('active');
+      removeHighlights();
+    }
+
     // Toggle search
     function toggleSearch() {
       const box = document.getElementById("searchBox");
       box.style.display = box.style.display === "block" ? "none" : "block";
     }
+
     // Hide search when click outside
     document.addEventListener("click", function(event) {
       const box = document.getElementById("searchBox");
@@ -193,7 +254,7 @@
       }
     });
 
-    // Search + highlight
+    // Search suggestions
     function showSuggestions(query) {
       const suggestionsBox = document.getElementById("suggestions");
       const sections = document.querySelectorAll("section");
@@ -214,15 +275,15 @@
         results.forEach(r => {
           const div = document.createElement("div");
           div.innerText = r.text;
-          div.onclick = () => highlightAndScroll(r.id, query);
+          div.onclick = () => highlightAndShow(r.id, query);
           suggestionsBox.appendChild(div);
         });
       }
     }
 
-    function highlightAndScroll(sectionId, keyword) {
+    function highlightAndShow(sectionId, keyword) {
+      showSection(sectionId);
       const section = document.getElementById(sectionId);
-      section.scrollIntoView({behavior: "smooth"});
       highlightText(section, keyword);
     }
 
@@ -236,6 +297,8 @@
         el.outerHTML = el.innerText;
       });
     }
+
+    document.addEventListener('DOMContentLoaded', () => showSection('home'));
   </script>
 </body>
 </html>
